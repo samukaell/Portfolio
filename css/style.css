@@ -1,18 +1,90 @@
+
+/*Reset do CSS*/
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body{
-  background-image: url('http://www.vanessametonini.com.br/imersaocss/a1/img/fundo.jpg');
+  background-image: url('../img/backgroundPreto.jpg');
   background-size: auto 100vh;
+
+  
+
   /*
     background-size: largura altura 
     vh(view port height (para altura)) e vw(view port width (para largura) é uma unidade de medida relativa sendo a porcetagem da tela en que se esta sendo exibido o conteudo
   */
   height: 100vh;
 
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 12px;
 }
 
+/*Função no css?*/
+
+/*se a tela tiver a largura minima de 400px*/
+@media (min-width: 400px){
+  body{
+    font-size: 14px;
+    
+  }
+}
+
+@media (min-width: 600px){
+  body{
+    font-size:18px;
+    
+  }
+}
+
+header {
+  height: 100vh;
+  /* 
+    vh(view port height (para altura)) e vw(view port width (para largura) é uma unidade de medida relativa sendo a porcetagem da tela en que se esta sendo exibido o conteudo
+  */
+
+  /*Centralizar o header verticalmente e mais complicado do que parece*/
+  /*Vamos usar flex pra facilitar isso*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+header div {
+  width: 700px;
+  height: 300px;
+  transition: 1s;
+}
+
+/*Interação com o header*/
+header div:hover .site-title, header div:hover .site-subtitle{
+  display: none;
+}
+
+header div:active,
+header div:hover{
+  background-image: url("../img/h1logoBraco.png");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 200px 200px;
+}
+
+
+
+
 .menu{
-  
   background-color: white;
+  position: fixed;
+  width: 100vw;
+  /*vw(view port width (para largura)*/
+
+  top: 0;
+  /*Essa propriedade so funciona se o position estiver declarado*/
+  z-index: 1;
 }
 
 .menu ul{
@@ -29,6 +101,18 @@ body{
   list-style: none;
 }
 
+.menu a{
+  display: block;
+  padding: 10px 20px;
+  transition: background-color 1s, color 1s;
+}
+
+.menu a:active,
+.menu a:hover{
+  background-color: teal;
+  color: whitesmoke;
+}
+
 a{
   color: teal;
   text-decoration: none;
@@ -37,11 +121,166 @@ a{
 a:hover{
   text-decoration: underline;
 }
+
+.titulo{
+  /*Animação do titulo*/
+
+  /*Inicio da animação*/
+  transform: scale(0.2) translate(50vh);
+  opacity: 0;
+
+  animation: ease-in 1s animacaoTitulo forwards;
+}
+
+/*Função do CSS responsavel pela animação*/
+@keyframes animacaoTitulo{
+  /*Inicio da animação*/
+  0%{
+    transform: scale(0.2) translate(50vh);
+    opacity: 0;
+  }
+
+  /*Fim da animação*/
+  100% {
+    transform: scale(1) translate(0);
+    opacity: 1;
+  }  
+}
+
 .site-title , .site-subtitle{
   color: whitesmoke;
   text-align: center;
 }
 
+.site-title{
+  font-size: 4em;
+  /*(em) e uma unidade de medida relaiva sendo a fonte 4em 4x maior que a devifina anteriormente*/
+
+  font-family: 'Indie Flower', cursive;
+
+}
+
 .site-subtitle{
   font-style: italic;
+  font-family: 'Unica One', cursive;
+  
+}
+
+.sobre,
+.contato,
+.porfolio{
+  padding: 2em;
+  min-height: 100vh;
+}
+
+@media (min-width: 1200px){
+  .container{
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.sobre h2,
+.contato h2,
+.porfolio h2{
+  color: whitesmoke;
+  font-family: 'Unica One', cursive;
+  font-size: 2em;
+  margin-bottom: 1.5em;
+
+}
+
+.sobre p{
+  color: whitesmoke;
+  text-indent: 1.6em;
+  margin-bottom: 1.6em;
+  text-align: justify;
+}
+
+.sobre a{
+  color: cyan;
+}
+
+.sobre .avatar{
+  margin-left: 2em;
+}
+
+.sobre .avatar img{
+  height: 300px;
+  width: 300px;
+
+  clip-path: circle(50% at 50% 50%);
+  margin-left: 2em;
+  
+}
+
+@media (min-width: 600px){
+  .sobre .avatar img{
+    height: 300px;
+    width: 300px;
+    float: right;
+    clip-path: circle(62.1% at 50% 50%);
+  }
+}
+
+.porfolio .grid{
+  display: grid;
+  gap: 2em;
+}
+
+@media (min-width: 560px){
+  .porfolio .grid{
+    grid-template-columns: 250px 250px;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 880px){
+  .porfolio .grid{
+    grid-template-columns: repeat(3, 250px);
+    align-content: center;
+    justify-content: center;
+    height: calc(100vh - 8em - 48px);
+  }
+}
+
+.porfolio a{
+  text-decoration: none;
+}
+
+.porfolio figure{
+  text-align: center;
+}
+
+.porfolio figcaption{
+  color: whitesmoke;
+}
+
+.img-portfolio{
+  height: 250px;
+  width: 250px;
+  border-radius: 60px;
+  transition: transform 500ms;
+}
+
+.img-portfolio:hover{
+  /*Efeito para a imagem crescer com houver*/
+  transform: scale(1.2);
+}
+
+.contato .icons {
+  text-align: center;
+}
+
+.contato a{
+  color: whitesmoke;
+  font-size: 4em;
+  transition: text-shadow 1s;
+}
+
+.contato a:active,
+.contato a:hover{
+  text-decoration: none;
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, .5);
 }
